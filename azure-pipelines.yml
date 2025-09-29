@@ -69,8 +69,9 @@ stages:
         chartPath: helm/nike-landing
         releaseName: nike-landing
         install: true
+        waitForExecution: true
         valueFile: helm/nike-landing/values.yaml
-        arguments: "--set image.repository=$(IMAGE_REPO) --set image.tag=$(IMAGE_TAG)"
+        arguments: "--set image.repository=docker.io/gunjan37raj/nike-landing-page,image.tag=$(IMAGE_TAG)"
 
     # - task: Kubernetes@1
     #   displayName: Deploy Manifests to AKS
