@@ -2,9 +2,9 @@ replicaCount: 2
 
 
 image:
-repository: <ACR_LOGIN_SERVER>/nike-landing
+repository: docker.io/gunjan37raj/nike-landing-page
 tag: "v0.1.0"
-pullPolicy: IfNotPresent
+pullPolicy: Always
 
 
 service:

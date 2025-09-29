@@ -1,24 +1,13 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-name: nike-landing
-namespace: argocd
-spec:
-project: default
 source:
-repoURL: <GIT_REPO_URL_CONTAINING_HELM_CHART>
-targetRevision: main
-path: helm/nike-landing
-helm:
-releaseName: nike-landing
-valueFiles:
-- values.yaml
+  repoURL: https://github.com/GunjanRajSingh/Sample-ArgoCD-Project.git     # Azure Repos/GitHub
+  targetRevision: main
+  path: helm/nike-landing
 destination:
-server: https://kubernetes.default.svc
-namespace: nike-landing
+  server: https://kubernetes.default.svc
+  namespace: nike-landing
 syncPolicy:
-automated:
-prune: true
-selfHeal: true
-syncOptions:
-- CreateNamespace=true
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true
