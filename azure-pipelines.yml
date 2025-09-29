@@ -56,11 +56,11 @@ stages:
         tags: |
           $(IMAGE_TAG)
 
-    - task: HelmDeploy@0
+    - task: HelmDeploy@1
       displayName: Helm Upgrade Nike Landing
       inputs:
         connectionType: Azure Resource Manager
-        azureSubscription: $(ARM-SC)'
+        azureSubscription: New-Serv-Conn
         azureResourceGroup: '$(AKS-RG)'
         kubernetesCluster: $(aksCluster)
         namespace: nike-landing
