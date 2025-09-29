@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nike-landing
+description: A Helm chart to deploy the Nike Landing React app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
