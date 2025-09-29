@@ -67,7 +67,7 @@ stages:
         command: apply
         useConfigurationFile: true
         configuration: |
-          kubectl apply -f argocd/application.yaml
+          # kubectl apply -f argocd/application.yaml
           kubectl apply -f helm/nike-landing/templates/deployment.yaml
           kubectl apply -f helm/nike-landing/templates/service.yaml
           kubectl apply -f helm/nike-landing/templates/ingress.yaml
