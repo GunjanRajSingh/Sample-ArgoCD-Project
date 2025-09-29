@@ -55,3 +55,19 @@ stages:
         repository: $(IMAGE_REPO)
         tags: |
           $(IMAGE_TAG)
+    
+    - task: Kubernetes@1
+      displayName: Deploy Manifests to AKS
+      inputs:
+        connectionType: Azure Resource Manager
+        azureSubscriptionEndpoint: '$(ARM-SC)'
+        azureResourceGroup: '$(aksRG)'
+        kubernetesCluster: '$(aksCluster)'
+        namespace: nike-landing
+        command: apply
+        useConfigurationFile: true
+        configuration: |
+          kubectl apply -f argocd/application.yaml
+          kubectl apply -f helm/nike-landing/templates/deployment.yaml
+          kubectl apply -f helm/nike-landing/templates/service.yaml
+          kubectl apply -f helm/nike-landing/templates/ingress.yaml
