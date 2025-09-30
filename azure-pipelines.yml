@@ -55,3 +55,35 @@ stages:
         repository: $(IMAGE_REPO)
         tags: |
           $(IMAGE_TAG)
+
+    - task: HelmDeploy@1
+      displayName: Helm Upgrade Nike Landing
+      inputs:
+        connectionType: Azure Resource Manager
+        azureSubscription: New-Serv-Conn
+        azureResourceGroup: '$(AKS-RG)'
+        kubernetesCluster: $(aksCluster)
+        namespace: nike-landing
+        command: upgrade
+        chartType: FilePath
+        chartPath: helm/nike-landing
+        releaseName: nike-landing
+        install: true
+        waitForExecution: true
+        valueFile: helm/nike-landing/values.yaml
+        arguments: "--set image.repository=docker.io/gunjan37raj/nike-landing-page,image.tag=$(IMAGE_TAG)"
+
+    # - task: Kubernetes@1
+    #   displayName: Deploy Manifests to AKS
+    #   inputs:
+    #     connectionType: Azure Resource Manager
+    #     azureSubscriptionEndpoint: '$(ARM-SC)'
+    #     azureResourceGroup: '$(aksRG)'
+    #     kubernetesCluster: '$(aksCluster)'
+    #     namespace: nike-landing
+    #     command: apply
+    #     useConfigurationFile: true
+    #     configuration: |
+    #       kubectl apply -f helm/nike-landing/templates/deployment.yaml
+    #       kubectl apply -f helm/nike-landing/templates/service.yaml
+    #       kubectl apply -f helm/nike-landing/templates/ingress.yaml
